@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be my valentine</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:slnt,wght@-10..0,500&display=swap');
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #ffffff;
+            font-family: "Inter", sans-serif;
+        }
+
+        .outer {
+            width: 540px;
+            height: 800px;
+            border: 2px solid black;
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #container {
+            text-align: center;
+        }
+
+        #teddy {
+            width: 250px;
+            margin: 20px;
+        }
+
+        #question {
+            font-size: 2rem;
+            margin: 10px;
+        }
+
+        .button {
+            padding: 10px 20px;
+            margin: 20px;
+            border: none;
+            border-radius: 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: .2s;
+        }
+
+        .button:hover {
+            transform: scale(1.1);
+        }
+
+        #greenBtn {
+            background-color: green;
+            color: white;
+            transition: transform 0.3s;
+        }
+
+        #redBtn {
+            background-color: red;
+            color: white;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        #noOptions {
+            font-size: 9px;
+            line-height: 1.2;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="outer">
+        <div id="container">
+            <img id="teddy" src="assets/initial.gif" alt="Cute Teddy Bear">
+            <div id="question">Will you be my valentine?</div>
+            <button id="greenBtn" class="button" onclick="greenBtnClick()">Yes</button>
+            <button id="redBtn" class="button" onclick="redBtnClick()">No</button>
+        </div>
+    </div>
+
+    <script>
+        let gifIndex = 1;
+
+        function greenBtnClick() {
+            const greenBtn = document.getElementById('greenBtn');
+            const redBtn = document.getElementById('redBtn');
+            const teddyImg = document.getElementById('teddy');
+
+            greenBtn.style.transform = 'scale(2)';
+            redBtn.classList.add('hidden');
+            teddyImg.src = 'assets/happy.gif';
+            document.getElementById('question').innerText = 'Happy Valentine\'s to both of us! 😊';
+            document.getElementById('greenBtn').innerText = '';
+            setTimeout(() => {
+                greenBtn.style.display = 'none';
+            }, 1000);
+        }
+
+        function redBtnClick() {
+            const greenBtn = document.getElementById('greenBtn');
+            const redBtn = document.getElementById('redBtn');
+            const teddyImg = document.getElementById('teddy');
+
+            if (redBtn.innerText === 'No') {
+                greenBtn.style.transform = 'scale(1.2)';
+                redBtn.innerText = 'Are you sure?';
+                teddyImg.src = 'assets/angry.gif';
+            } else if (redBtn.innerText === 'Are you sure?') {
+                greenBtn.style.transform = 'scale(1.4)';
+                redBtn.innerText = 'Think again';
+                teddyImg.src = 'assets/confused.gif';
+            } else if (redBtn.innerText === 'Think again') {
+                greenBtn.style.transform = 'scale(1.6)';
+                redBtn.innerText = 'Pretty please';
+                teddyImg.src = 'assets/please.gif';
+            } else if (redBtn.innerText === 'Pretty please') {
+                greenBtn.style.transform = 'scale(1.8)';
+                redBtn.classList.add('hidden');
+                // document.getElementById('question').innerText = 'No other options available 😜';
+                document.getElementById('greenBtn').innerHTML = 'Yes !<br><span id="noOptions">No other options available 😜</span>';
+            }
+        }
+    </script>
+
+</body>
+
+</html>
